@@ -37,7 +37,8 @@ class ExploreGui:
         btn_decrease = tk.Button(master=self.window, text="-", width=5, height=1,
                                  command=lambda x=None: self.decrease(iteration_var, gui_elements, plot_elements, model_outputs))
 
-        scale = tk.Scale(self.window, variable=iteration_var, from_=0, to_=99,
+        number_of_iterations = len(model_outputs.prediction_functions) - 1
+        scale = tk.Scale(self.window, variable=iteration_var, from_=0, to_=number_of_iterations,
                          command=lambda x=None: self.update_iteration(iteration_var, gui_elements, plot_elements, model_outputs),
                          orient=tk.HORIZONTAL, length=1000)
 

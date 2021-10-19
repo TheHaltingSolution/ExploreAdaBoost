@@ -15,9 +15,10 @@ def main():
     model_sq = lambda argument_array: argument_array[0] ** 2
     model_sin = lambda argument_array: np.sin(argument_array[0])
     model_sin3x = lambda argument_array: np.sin(3 * argument_array[0])
-    model_sinxd3 = lambda argument_array: np.sin(argument_array[0]/3.0)
-    model = model_sinxd3
+    model_sinxd2 = lambda argument_array: np.sin(argument_array[0]/2.0)
+    model = model_sinxd2
 
+    number_of_iteration = 500  # num classifier in ensemble
     domain_min = [-10]
     domain_max = [10]
     points_per_dimension = [200]
@@ -25,7 +26,7 @@ def main():
     experiment_model = TrueModel(model, domain_min, domain_max, points_per_dimension)
     model_sample = experiment_model.get_uniform_domain_sample(123)
 
-    clf = AdaBoostClassifier(n_estimators=100, random_state=0, algorithm='SAMME')
+    clf = AdaBoostClassifier(n_estimators=number_of_iteration, random_state=0, algorithm='SAMME')
     clf.fit(model_sample.X_sample, model_sample.y_sample)
 
     estimator_list = clf.estimators_
